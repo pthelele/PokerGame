@@ -11,6 +11,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class UtilTest {
     private HandEvaluator handEvaluator;
@@ -20,12 +23,14 @@ class UtilTest {
     @BeforeAll
     void setHandObjects() {
         handEvaluator = new HandEvaluator();
-        play = new PlayerHand();
-        play.addCard(new Card(Rank.JACK, Suit.DIAMONDS));
-        play.addCard(new Card(Rank.JACK, Suit.HEARTS));
-        play.addCard(new Card(Rank.JACK, Suit.DIAMONDS));
-        play.addCard(new Card(Rank.JACK, Suit.SPADES));
-        play.addCard(new Card(Rank.NINE, Suit.DIAMONDS));
+        ArrayList<Card> cards = new ArrayList<>();
+
+        play = new PlayerHand(cards);
+        cards.add(new Card(Rank.JACK, Suit.DIAMONDS));
+        cards.add(new Card(Rank.JACK, Suit.HEARTS));
+        cards.add(new Card(Rank.JACK, Suit.DIAMONDS));
+        cards.add(new Card(Rank.JACK, Suit.SPADES));
+        cards.add(new Card(Rank.NINE, Suit.DIAMONDS));
     }
 
     @Test
