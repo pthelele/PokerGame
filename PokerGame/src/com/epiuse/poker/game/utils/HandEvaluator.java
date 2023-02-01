@@ -1,11 +1,7 @@
 package com.epiuse.poker.game.utils;
 
-import com.epiuse.poker.game.card.Card;
 import com.epiuse.poker.game.player.PlayerHand;
-import org.junit.platform.commons.util.AnnotationUtils;
 
-import java.util.ArrayList;
-import java.util.stream.IntStream;
 
 public class HandEvaluator {
 

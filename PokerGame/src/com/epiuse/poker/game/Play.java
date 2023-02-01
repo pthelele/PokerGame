@@ -1,6 +1,7 @@
 package com.epiuse.poker.game;
 
 import com.epiuse.poker.game.card.Card;
+import com.epiuse.poker.game.card.Deck;
 import com.epiuse.poker.game.card.Rank;
 import com.epiuse.poker.game.card.Suit;
 import com.epiuse.poker.game.dealer.Dealer;
@@ -16,50 +17,29 @@ import java.util.Scanner;
 public class Play {
 
     public static void main(String args[]) {
-        ArrayList<Card> deck = new ArrayList<Card>();
-        Card card;
+        Deck cardDeck = new Deck();
 
-        Suit[] suits = Suit.values();
-        Rank[] rank = Rank.values();
-
-        HandEvaluator handEvaluator = new HandEvaluator();
-        PlayerHand playerHand = new PlayerHand();
+        cardDeck.createCardDeck();
 
         Util util = new Util();
-
-        //Adding cards to the deck ArrayList
-        for(int i = 0; i < 4; i ++) {
-            for (int j = 0; j < 13; j++) {
-                card = new Card(rank[j], suits[i]);
-                deck.add(card);
-            }
-        }
-
-
-
-
 
         System.out.println("Enter number of cards to deal for player");
         Scanner input = new Scanner(System.in);
         int cardsToDeal = Integer.parseInt(input.nextLine());
 
-            //Using the Library to shuffle the cards.
-            Collections.shuffle(deck);
-            Collections.shuffle(deck);
-
             System.out.print("Shuffling...Shuffling...Shuffling... Your hand: ");
+            cardDeck.shuffleDeck();
+            cardDeck.shuffleDeck();
 
-            //Dealing cards from the deck
-            for(int i = 0; i < cardsToDeal; i++) {
-                playerHand.addCard(deck.get(i));
-                deck.remove(i);
-            }
+            PlayerHand playerHand = new PlayerHand();
+            playerHand.dealCard(cardDeck, cardsToDeal);
 
 
 
             //sorting the hand
             util.sortHand(playerHand);
 
+            HandEvaluator handEvaluator = new HandEvaluator();
 
             String playersHand = "";
             //Classifying player's hand

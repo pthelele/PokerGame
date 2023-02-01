@@ -7,8 +7,9 @@ import com.epiuse.poker.game.player.PlayerHand;
 import com.epiuse.poker.game.utils.HandEvaluator;
 import com.epiuse.poker.game.utils.Util;
 import org.junit.Assert;
-
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 
 class HandEvaluatorTest {
@@ -17,12 +18,15 @@ class HandEvaluatorTest {
     @Test
     void isStraightFlush() {
         HandEvaluator strFlushHand = new HandEvaluator();
-        PlayerHand straightFlush = new PlayerHand();
-        straightFlush.addCard(new Card(Rank.ACE, Suit.CLUBS));
-        straightFlush.addCard(new Card(Rank.TWO, Suit.CLUBS));
-        straightFlush.addCard(new Card(Rank.THREE, Suit.CLUBS));
-        straightFlush.addCard(new Card(Rank.FIVE, Suit.CLUBS));
-        straightFlush.addCard(new Card(Rank.FOUR, Suit.CLUBS));
+        ArrayList<Card> cards = new ArrayList<>();
+
+        cards.add(new Card(Rank.ACE, Suit.CLUBS));
+        cards.add(new Card(Rank.TWO, Suit.CLUBS));
+        cards.add(new Card(Rank.THREE, Suit.CLUBS));
+        cards.add(new Card(Rank.FIVE, Suit.CLUBS));
+        cards.add(new Card(Rank.FOUR, Suit.CLUBS));
+
+        PlayerHand straightFlush = new PlayerHand(cards);
 
         util.sortHand(straightFlush);
 
@@ -32,13 +36,15 @@ class HandEvaluatorTest {
     @Test
     void isFourOfAKind() {
         HandEvaluator fourOfaKind = new HandEvaluator();
-        PlayerHand play = new PlayerHand();
+        ArrayList<Card> cards = new ArrayList<>();
 
-        play.addCard(new Card(Rank.FOUR, Suit.DIAMONDS));
-        play.addCard(new Card(Rank.FOUR, Suit.HEARTS));
-        play.addCard(new Card(Rank.FOUR, Suit.DIAMONDS));
-        play.addCard(new Card(Rank.TWO, Suit.SPADES));
-        play.addCard(new Card(Rank.FOUR, Suit.DIAMONDS));
+        cards.add(new Card(Rank.FOUR, Suit.DIAMONDS));
+        cards.add(new Card(Rank.FOUR, Suit.HEARTS));
+        cards.add(new Card(Rank.FOUR, Suit.DIAMONDS));
+        cards.add(new Card(Rank.TWO, Suit.SPADES));
+        cards.add(new Card(Rank.FOUR, Suit.DIAMONDS));
+
+        PlayerHand play = new PlayerHand(cards);
 
         util.sortHand(play);
 
@@ -48,13 +54,16 @@ class HandEvaluatorTest {
     @Test
     void isFullHouse() {
         HandEvaluator fullHouse = new HandEvaluator();
-        PlayerHand play = new PlayerHand();
+        ArrayList<Card> cards = new ArrayList<>();
 
-        play.addCard(new Card(Rank.FOUR, Suit.DIAMONDS));
-        play.addCard(new Card(Rank.FOUR, Suit.HEARTS));
-        play.addCard(new Card(Rank.FOUR, Suit.DIAMONDS));
-        play.addCard(new Card(Rank.SEVEN, Suit.SPADES));
-        play.addCard(new Card(Rank.SEVEN, Suit.DIAMONDS));
+
+        cards.add(new Card(Rank.FOUR, Suit.DIAMONDS));
+        cards.add(new Card(Rank.FOUR, Suit.HEARTS));
+        cards.add(new Card(Rank.FOUR, Suit.DIAMONDS));
+        cards.add(new Card(Rank.SEVEN, Suit.SPADES));
+        cards.add(new Card(Rank.SEVEN, Suit.DIAMONDS));
+
+        PlayerHand play = new PlayerHand(cards);
 
         Assert.assertTrue(fullHouse.isFullHouse(play));
     }
@@ -62,13 +71,15 @@ class HandEvaluatorTest {
     @Test
     void isFlush() {
         HandEvaluator handEvaluator = new HandEvaluator();
-        PlayerHand play = new PlayerHand();
+        ArrayList<Card> cards = new ArrayList<>();
 
-        play.addCard(new Card(Rank.KING, Suit.DIAMONDS));
-        play.addCard(new Card(Rank.FIVE, Suit.DIAMONDS));
-        play.addCard(new Card(Rank.SEVEN, Suit.DIAMONDS));
-        play.addCard(new Card(Rank.SIX, Suit.DIAMONDS));
-        play.addCard(new Card(Rank.EIGHT, Suit.DIAMONDS));
+        cards.add(new Card(Rank.KING, Suit.DIAMONDS));
+        cards.add(new Card(Rank.FIVE, Suit.DIAMONDS));
+        cards.add(new Card(Rank.SEVEN, Suit.DIAMONDS));
+        cards.add(new Card(Rank.SIX, Suit.DIAMONDS));
+        cards.add(new Card(Rank.EIGHT, Suit.DIAMONDS));
+
+        PlayerHand play = new PlayerHand(cards);
 
         Assert.assertTrue(handEvaluator.isFlush(play));
 
@@ -77,13 +88,15 @@ class HandEvaluatorTest {
     @Test
     void isRankSequential() {
         HandEvaluator sequential = new HandEvaluator();
-        PlayerHand play = new PlayerHand();
+        ArrayList<Card> cards = new ArrayList<>();
 
-        play.addCard(new Card(Rank.FOUR, Suit.DIAMONDS));
-        play.addCard(new Card(Rank.FIVE, Suit.HEARTS));
-        play.addCard(new Card(Rank.SEVEN, Suit.DIAMONDS));
-        play.addCard(new Card(Rank.SIX, Suit.SPADES));
-        play.addCard(new Card(Rank.EIGHT, Suit.DIAMONDS));
+        cards.add(new Card(Rank.FOUR, Suit.DIAMONDS));
+        cards.add(new Card(Rank.FIVE, Suit.HEARTS));
+        cards.add(new Card(Rank.SEVEN, Suit.DIAMONDS));
+        cards.add(new Card(Rank.SIX, Suit.SPADES));
+        cards.add(new Card(Rank.EIGHT, Suit.DIAMONDS));
+
+        PlayerHand play = new PlayerHand(cards);
 
         util.sortHand(play);
 
@@ -93,13 +106,15 @@ class HandEvaluatorTest {
     @Test
     void isStraight() {
         HandEvaluator straight = new HandEvaluator();
-        PlayerHand play = new PlayerHand();
+        ArrayList<Card> cards = new ArrayList<>();
 
-        play.addCard(new Card(Rank.FOUR, Suit.DIAMONDS));
-        play.addCard(new Card(Rank.FIVE, Suit.HEARTS));
-        play.addCard(new Card(Rank.SEVEN, Suit.DIAMONDS));
-        play.addCard(new Card(Rank.SIX, Suit.SPADES));
-        play.addCard(new Card(Rank.EIGHT, Suit.DIAMONDS));
+        cards.add(new Card(Rank.FOUR, Suit.DIAMONDS));
+        cards.add(new Card(Rank.FIVE, Suit.HEARTS));
+        cards.add(new Card(Rank.SEVEN, Suit.DIAMONDS));
+        cards.add(new Card(Rank.SIX, Suit.SPADES));
+        cards.add(new Card(Rank.EIGHT, Suit.DIAMONDS));
+
+        PlayerHand play = new PlayerHand(cards);
 
         util.sortHand(play);
 
@@ -109,13 +124,15 @@ class HandEvaluatorTest {
     @Test
     void isThreeOFaKind() {
         HandEvaluator threeOfaKind = new HandEvaluator();
-        PlayerHand play = new PlayerHand();
+        ArrayList<Card> cards = new ArrayList<>();
 
-        play.addCard(new Card(Rank.TWO, Suit.HEARTS));
-        play.addCard(new Card(Rank.SIX, Suit.CLUBS));
-        play.addCard(new Card(Rank.EIGHT, Suit.DIAMONDS));
-        play.addCard(new Card(Rank.SIX, Suit.HEARTS));
-        play.addCard(new Card(Rank.SIX, Suit.SPADES));
+        cards.add(new Card(Rank.TWO, Suit.HEARTS));
+        cards.add(new Card(Rank.SIX, Suit.CLUBS));
+        cards.add(new Card(Rank.EIGHT, Suit.DIAMONDS));
+        cards.add(new Card(Rank.SIX, Suit.HEARTS));
+        cards.add(new Card(Rank.SIX, Suit.SPADES));
+
+        PlayerHand play = new PlayerHand(cards);
 
         util.sortHand(play);
 
@@ -125,13 +142,16 @@ class HandEvaluatorTest {
     @Test
     void isSuitMatching() {
         HandEvaluator handEvaluator = new HandEvaluator();
-        PlayerHand play = new PlayerHand();
+        ArrayList<Card> cards = new ArrayList<>();
 
-        play.addCard(new Card(Rank.FOUR, Suit.DIAMONDS));
-        play.addCard(new Card(Rank.FOUR, Suit.HEARTS));
-        play.addCard(new Card(Rank.SEVEN, Suit.DIAMONDS));
-        play.addCard(new Card(Rank.FOUR, Suit.SPADES));
-        play.addCard(new Card(Rank.FOUR, Suit.DIAMONDS));
+
+        cards.add(new Card(Rank.FOUR, Suit.DIAMONDS));
+        cards.add(new Card(Rank.FOUR, Suit.HEARTS));
+        cards.add(new Card(Rank.SEVEN, Suit.DIAMONDS));
+        cards.add(new Card(Rank.FOUR, Suit.SPADES));
+        cards.add(new Card(Rank.FOUR, Suit.DIAMONDS));
+
+        PlayerHand play = new PlayerHand(cards);
 
         Assert.assertTrue(handEvaluator.isSuitMatching(play));
     }
@@ -139,13 +159,15 @@ class HandEvaluatorTest {
     @Test
     void isTwoPair() {
         HandEvaluator twoPair = new HandEvaluator();
-        PlayerHand play = new PlayerHand();
+        ArrayList<Card> cards = new ArrayList<>();
 
-        play.addCard(new Card(Rank.FOUR, Suit.DIAMONDS));
-        play.addCard(new Card(Rank.TWO, Suit.HEARTS));
-        play.addCard(new Card(Rank.SEVEN, Suit.DIAMONDS));
-        play.addCard(new Card(Rank.SEVEN, Suit.SPADES));
-        play.addCard(new Card(Rank.FOUR, Suit.DIAMONDS));
+        cards.add(new Card(Rank.FOUR, Suit.DIAMONDS));
+        cards.add(new Card(Rank.TWO, Suit.HEARTS));
+        cards.add(new Card(Rank.SEVEN, Suit.DIAMONDS));
+        cards.add(new Card(Rank.SEVEN, Suit.SPADES));
+        cards.add(new Card(Rank.FOUR, Suit.DIAMONDS));
+
+        PlayerHand play = new PlayerHand(cards);
 
         Assert.assertTrue(twoPair.isTwoPair(play, 5));
     }
@@ -153,13 +175,15 @@ class HandEvaluatorTest {
     @Test
     void isOnePair() {
         HandEvaluator onePair = new HandEvaluator();
-        PlayerHand play = new PlayerHand();
+        ArrayList<Card> cards = new ArrayList<>();
 
-        play.addCard(new Card(Rank.ACE, Suit.HEARTS));
-        play.addCard(new Card(Rank.SEVEN, Suit.HEARTS));
-        play.addCard(new Card(Rank.SIX, Suit.SPADES));
-        play.addCard(new Card(Rank.EIGHT, Suit.SPADES));
-        play.addCard(new Card(Rank.KING, Suit.DIAMONDS));
+        cards.add(new Card(Rank.ACE, Suit.HEARTS));
+        cards.add(new Card(Rank.SEVEN, Suit.HEARTS));
+        cards.add(new Card(Rank.SIX, Suit.SPADES));
+        cards.add(new Card(Rank.EIGHT, Suit.SPADES));
+        cards.add(new Card(Rank.KING, Suit.DIAMONDS));
+
+        PlayerHand play = new PlayerHand(cards);
 
         util.sortHand(play);
         Assert.assertTrue(onePair.isOnePair(play, 5));
